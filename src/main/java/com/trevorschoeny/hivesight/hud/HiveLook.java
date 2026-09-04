@@ -29,7 +29,7 @@ public final class HiveLook {
         MKHudPanel.builder("hivesight:hive-card")
                 .anchor(MKHudAnchor.CENTER, 0, 20)   // just below the crosshair
                 .autoSize().padding(4)
-                .style(PanelStyle.DARK)
+                .style(PanelStyle.NONE)
                 .hideInScreen()                       // no card while a menu is open
                 .showWhen(HiveLook::isActive)
                 .text(0, 0,  () -> "Bees: "  + bees()  + "/" + BeehiveBlockEntity.MAX_OCCUPANTS)

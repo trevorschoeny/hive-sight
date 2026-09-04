@@ -1,1 +1,1 @@
-First release. Shift-look a hive to see its bees and honey; shift-right-click to let one bee out.
+First release. Hold shift and look at a hive to see its bee count and honey level. Shift-right-click to let one bee out, day or night, whatever you're holding. Full hives show honey on all four sides. Each feature has its own switch.

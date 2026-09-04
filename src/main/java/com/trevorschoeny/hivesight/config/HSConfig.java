@@ -34,6 +34,8 @@ public final class HSConfig {
     private static boolean hud = true;
     // Shift-right-click lets one bee out. Read on both sides.
     private static boolean eject = true;
+    // Honey drips on all four sides of a full hive. Client-side (a resource pack).
+    private static boolean honeyFaces = true;
 
     private static boolean loaded = false;
 
@@ -55,6 +57,7 @@ public final class HSConfig {
             JsonObject root = JsonParser.parseString(Files.readString(path)).getAsJsonObject();
             hud = readBool(root, "hud", hud);
             eject = readBool(root, "eject", eject);
+            honeyFaces = readBool(root, "honeyFaces", honeyFaces);
             HiveSight.LOGGER.info("[config] loaded from {}", path);
         } catch (IOException | JsonSyntaxException | IllegalStateException e) {
             HiveSight.LOGGER.error("[config] failed to read {}, using defaults", path, e);
@@ -74,6 +77,7 @@ public final class HSConfig {
             root.addProperty("version", CURRENT_VERSION);
             root.addProperty("hud", hud);
             root.addProperty("eject", eject);
+            root.addProperty("honeyFaces", honeyFaces);
             Files.writeString(path, GSON.toJson(root));
         } catch (IOException e) {
             HiveSight.LOGGER.error("[config] failed to write {}, changes won't persist", path, e);
@@ -85,4 +89,7 @@ public final class HSConfig {
 
     public static boolean eject() { return eject; }
     public static void setEject(boolean v) { eject = v; save(); }
+
+    public static boolean honeyFaces() { return honeyFaces; }
+    public static void setHoneyFaces(boolean v) { honeyFaces = v; save(); }
 }

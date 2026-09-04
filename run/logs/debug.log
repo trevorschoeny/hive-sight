@@ -1,0 +1,9 @@
+[15:29:14] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 26.2 with Fabric Loader 0.19.5
+[15:29:14] [main/INFO] (FabricLoader/Mappings) Mappings not present!
+[15:29:14] [main/DEBUG] (FabricLoader/GamePatch) Found game constructor: net.minecraft.client.main.Main -> net.minecraft.client.Minecraft
+[15:29:14] [main/DEBUG] (FabricLoader/GamePatch) Patching game constructor <init>(Lnet/minecraft/client/main/GameConfig;)V
+[15:29:14] [main/DEBUG] (FabricLoader/GamePatch) Run directory field is thought to be net/minecraft/client/Minecraft/gameDirectory
+[15:29:14] [main/DEBUG] (FabricLoader/GamePatch) Applying brand name hook to net/minecraft/client/ClientBrandRetriever::getClientModName
+[15:29:14] [main/DEBUG] (FabricLoader/GamePatch) Applying brand name hook to net/minecraft/server/MinecraftServer::getServerModName
+[15:29:14] [main/DEBUG] (FabricLoader/GamePatch) Patched 3 classs
+[15:29:14] [main/DEBUG] (FabricLoader/Discovery) Mod discovery time: 26.2 ms

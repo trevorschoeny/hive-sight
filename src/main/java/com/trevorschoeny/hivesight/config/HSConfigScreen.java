@@ -1,5 +1,7 @@
 package com.trevorschoeny.hivesight.config;
 
+import com.trevorschoeny.hivesight.honeyfaces.HoneyFaces;
+
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
@@ -30,6 +32,14 @@ public final class HSConfigScreen {
                         + "Works at night and in the rain. On a dedicated server this is the "
                         + "server's setting.",
                 true, HSConfig::eject, HSConfig::setEject);
+        Option<Boolean> honeyFaces = booleanOption(
+                "Honey Faces",
+                "When a hive is full, show the honey drips on all four sides instead of "
+                        + "only the front. Changing this reloads resources.",
+                true, HSConfig::honeyFaces, v -> {
+                    HSConfig.setHoneyFaces(v);
+                    HoneyFaces.apply(v);
+                });
 
         ConfigCategory features = ConfigCategory.createBuilder()
                 .name(Component.literal("Features"))
@@ -39,6 +49,7 @@ public final class HSConfigScreen {
                                 "Bee hives made legible. Each feature has its own switch.")))
                         .option(hud)
                         .option(eject)
+                        .option(honeyFaces)
                         .build())
                 .build();
 

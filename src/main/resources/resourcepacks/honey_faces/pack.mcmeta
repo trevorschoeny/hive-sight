@@ -1,0 +1,8 @@
+{
+  "pack": {
+    "description": "Hive Sight: honey drips on all four sides of a full hive",
+    "pack_format": 88,
+    "min_format": [88, 0],
+    "max_format": [88, 2147483647]
+  }
+}

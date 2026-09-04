@@ -1,0 +1,24 @@
+{
+  "stats": {
+    "minecraft:custom": {
+      "minecraft:sprint_one_cm": 1858,
+      "minecraft:time_since_rest": 1720,
+      "minecraft:walk_one_cm": 5326,
+      "minecraft:total_world_time": 208427,
+      "minecraft:fly_one_cm": 2141,
+      "minecraft:crouch_one_cm": 506,
+      "minecraft:sneak_time": 134,
+      "minecraft:play_time": 1720,
+      "minecraft:jump": 9,
+      "minecraft:time_since_death": 1720
+    },
+    "minecraft:picked_up": {
+      "minecraft:honeycomb": 3
+    },
+    "minecraft:used": {
+      "minecraft:shears": 1,
+      "minecraft:glass_bottle": 1
+    }
+  },
+  "DataVersion": 4903
+}

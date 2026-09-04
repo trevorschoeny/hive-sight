@@ -95,7 +95,7 @@ processResources {
 // the project id here. Only Lead runs these tasks.
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
-    projectId = "PENDING-LEAD"   // set by Lead once the Modrinth project exists
+    projectId = "BelJ1MMO"
     versionNumber = property('hivesight_version')
     versionName = "Hive Sight ${property('hivesight_version')}"
     versionType = "release"

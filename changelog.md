@@ -1,1 +1,1 @@
-First release. Hold shift and look at a hive to see its bee count and honey level. Shift-right-click to let one bee out, day or night, whatever you're holding. Full hives show honey on all four sides. Each feature has its own switch.
+Built against MenuKit 3.0.0. Requires MenuKit 3.0.0 or newer. No feature changes.

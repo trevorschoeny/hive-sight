@@ -1,9 +1,9 @@
 package com.trevorschoeny.hivesight.hud;
 
 import com.trevorschoeny.hivesight.config.HSConfig;
-import com.trevorschoeny.menukit.core.PanelStyle;
-import com.trevorschoeny.menukit.hud.MKHudAnchor;
-import com.trevorschoeny.menukit.hud.MKHudPanel;
+import com.trevlar.menukit.core.PanelStyle;
+import com.trevlar.menukit.hud.MKHudAnchor;
+import com.trevlar.menukit.hud.MKHudPanel;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.block.BeehiveBlock;

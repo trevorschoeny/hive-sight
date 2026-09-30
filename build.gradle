@@ -39,6 +39,12 @@ repositories {
     maven { url 'https://api.modrinth.com/maven' }
 }
 
+// MenuKit 6.0.0 splits into main and client source sets (§0062). A project
+// dependency sees only main, so its client half (HudPanel and the rest of the
+// HUD API HiveLook uses) is added by output below, which needs MenuKit
+// evaluated first.
+evaluationDependsOn(':menukit')
+
 dependencies {
     // 26.x: the game is unobfuscated — no mappings line; mod deps use the
     // standard java configurations.
@@ -56,9 +62,13 @@ dependencies {
     implementation "maven.modrinth:yacl:3.9.6+26.2-fabric"
     include        "maven.modrinth:yacl:3.9.6+26.2-fabric"
 
-    // MenuKit — the HUD card renders through MKHudPanel. MenuKit only: the
+    // MenuKit — the HUD card renders through HudPanel. MenuKit only: the
     // classpath shape proves nothing here reaches MenuKit: Containers.
     implementation project(':menukit')
+    // MenuKit's client half, which the project dep above leaves out (Hive
+    // Sight has no split source set of its own, so this is a plain
+    // implementation dep, not clientImplementation).
+    implementation rootProject.project(':menukit').sourceSets.client.output
 }
 
 loom {

@@ -1,9 +1,9 @@
 package com.trevorschoeny.hivesight.hud;
 
 import com.trevorschoeny.hivesight.config.HSConfig;
-import com.trevlar.menukit.core.PanelStyle;
-import com.trevlar.menukit.hud.MKHudAnchor;
-import com.trevlar.menukit.hud.MKHudPanel;
+import com.trevlar.menukit.api.hud.HudPanel;
+import com.trevlar.menukit.api.panel.InsideRegion;
+import com.trevlar.menukit.api.panel.PanelStyle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.block.BeehiveBlock;
@@ -26,12 +26,13 @@ public final class HiveLook {
     private HiveLook() {}
 
     public static void register() {
-        MKHudPanel.builder("hivesight:hive-card")
-                .anchor(MKHudAnchor.CENTER, 0, 20)   // just below the crosshair
+        HudPanel.builder("hivesight:hive-card")
+                .region(InsideRegion.CENTER).offset(0, 20)   // just below the crosshair
                 .autoSize().padding(4)
                 .style(PanelStyle.NONE)
-                .hideInScreen()                       // no card while a menu is open
-                .showWhen(HiveLook::isActive)
+                // No card while a menu is open (the old .hideInScreen()), folded into the
+                // one visibility check per MenuKit 6.0.0's HudPanel.Builder#visibleWhen.
+                .visibleWhen(() -> Minecraft.getInstance().gui.screen() == null && isActive())
                 .text(0, 0,  () -> "Bees: "  + bees()  + "/" + BeehiveBlockEntity.MAX_OCCUPANTS)
                 .text(0, 12, () -> "Honey: " + honey() + "/" + BeehiveBlock.MAX_HONEY_LEVELS)
                 .build();

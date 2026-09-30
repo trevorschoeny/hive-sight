@@ -12,7 +12,7 @@ Each feature has its own switch under Mod Menu, Hive Sight.
 
 ## Install
 
-- MenuKit 5.0.0 or newer, below 6.0.0
+- MenuKit 6.0.0 or newer, below 7.0.0
 - Fabric API
 
 Install on both client and server. In single player nothing else is needed.

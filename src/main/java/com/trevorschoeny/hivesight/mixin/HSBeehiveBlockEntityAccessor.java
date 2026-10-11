@@ -35,7 +35,8 @@ public interface HSBeehiveBlockEntityAccessor {
      * the exit sound, fires the game event. Returns false only if the bee
      * entity could not be created (or, under a non-EMERGENCY status, if the
      * exit is blocked or bees are told to stay in). Eject always calls it with
-     * {@code EMERGENCY} and does its own exit check first; see design.md.
+     * {@code EMERGENCY}, which skips the blocked-exit refusal, so Eject does
+     * its own exit check first.
      */
     @Invoker("releaseOccupant")
     static boolean hivesight$releaseOccupant(Level level, BlockPos pos, BlockState state,

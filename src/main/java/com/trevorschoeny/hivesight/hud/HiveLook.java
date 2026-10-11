@@ -30,15 +30,14 @@ public final class HiveLook {
                 .region(InsideRegion.CENTER).offset(0, 20)   // just below the crosshair
                 .autoSize().padding(4)
                 .style(PanelStyle.NONE)
-                // No card while a menu is open (the old .hideInScreen()), folded into the
-                // one visibility check per MenuKit 6.0.0's HudPanel.Builder#visibleWhen.
+                // No card while a menu is open. MenuKit 6.0.0 dropped .hideInScreen(), so
+                // that check is part of the one visibleWhen predicate.
                 .visibleWhen(() -> Minecraft.getInstance().gui.screen() == null && isActive())
                 .text(0, 0,  () -> "Bees: "  + bees()  + "/" + BeehiveBlockEntity.MAX_OCCUPANTS)
                 .text(0, 12, () -> "Honey: " + honey() + "/" + BeehiveBlock.MAX_HONEY_LEVELS)
                 .build();
     }
 
-    /** Shift held and the crosshair is on a hive within reach. */
     private static boolean isActive() {
         Minecraft mc = Minecraft.getInstance();
         return HSConfig.hud()
@@ -47,7 +46,7 @@ public final class HiveLook {
                 && target() != null;
     }
 
-    /** The hive under the crosshair, or null. Vanilla's pick stops at glass; see design.md. */
+    /** The hive under the crosshair, or null. Vanilla's pick stops at glass, so a hive behind glass shows no card. */
     private static BeehiveBlockEntity target() {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null) return null;

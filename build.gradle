@@ -1,17 +1,12 @@
-// ═══════════════════════════════════════════════════════════════════════════
-// Hive Sight — bee hives made legible. Universal Fabric mod (environment "*"):
+// Hive Sight: bee hives made legible. Universal Fabric mod (environment "*"):
 // the server half syncs bee occupancy to clients and performs the eject; the
 // client half draws the HUD card and owns the config screen. Depends on
 // MenuKit (HUD panel) only; nothing here touches slots, so no MenuKit:
 // Containers.
 //
-// Design: Hive Sight team drive, design.md. House rules: Trevlar Mods drive,
-// guidelines/building-mods.md and guidelines/ci-cd.md.
-//
 // Build: `./gradlew :hive-sight:build` from the workspace root (the composite
 // build in ~/Projects/Minecraft/Trevlar Mods). Test scene:
 // `test-gallery/run-scene.sh hive-sight <scene>`.
-// ═══════════════════════════════════════════════════════════════════════════
 
 plugins {
     // Loom 1.17 is the 26.2-era line; the version is pinned at the workspace root.
@@ -33,37 +28,37 @@ java {
 
 repositories {
     maven { url 'https://maven.fabricmc.net/' }
-    // ModMenu — Terraformers' Maven.
+    // ModMenu, from Terraformers' Maven.
     maven { url 'https://maven.terraformersmc.com/releases/' }
-    // YACL — the 26.2 builds (3.9.x) ship via the Modrinth maven only.
+    // YACL's 26.2 builds (3.9.x) are only on this Maven repository.
     maven { url 'https://api.modrinth.com/maven' }
 }
 
-// MenuKit 6.0.0 splits into main and client source sets (§0062). A project
+// MenuKit 6.0.0 splits into main and client source sets. A project
 // dependency sees only main, so its client half (HudPanel and the rest of the
 // HUD API HiveLook uses) is added by output below, which needs MenuKit
 // evaluated first.
 evaluationDependsOn(':menukit')
 
 dependencies {
-    // 26.x: the game is unobfuscated — no mappings line; mod deps use the
-    // standard java configurations.
+    // 26.x: the game is unobfuscated, so there is no mappings line and mod deps
+    // use the standard java configurations.
     minecraft "com.mojang:minecraft:${property('minecraft_version')}"
     implementation "net.fabricmc:fabric-loader:${property('loader_version')}"
     implementation "net.fabricmc.fabric-api:fabric-api:${property('fabric_version')}"
 
-    // ModMenu — surfaces the config screen from the mods list. Soft dep at
+    // ModMenu shows the config screen from the mods list. Soft dep at
     // runtime; compileOnly for the API, localRuntime for the dev launch.
     compileOnly "com.terraformersmc:modmenu:20.0.1"
     localRuntime "com.terraformersmc:modmenu:20.0.1"
 
-    // YACL — config-screen framework, bundled into the jar (Jar-in-Jar) per
-    // building-mods.md. implementation = compile + dev runtime; include = JIJ.
+    // YACL, the config-screen framework, is bundled into the jar (Jar-in-Jar).
+    // implementation = compile + dev runtime; include = JIJ.
     implementation "maven.modrinth:yacl:3.9.6+26.2-fabric"
     include        "maven.modrinth:yacl:3.9.6+26.2-fabric"
 
-    // MenuKit — the HUD card renders through HudPanel. MenuKit only: the
-    // classpath shape proves nothing here reaches MenuKit: Containers.
+    // The HUD card renders through MenuKit's HudPanel. Only MenuKit is on the
+    // classpath, which proves nothing here reaches MenuKit: Containers.
     implementation project(':menukit')
     // MenuKit's client half, which the project dep above leaves out (Hive
     // Sight has no split source set of its own, so this is a plain
@@ -90,7 +85,7 @@ jar {
     from('LICENSE') { rename { "${it}_${project.name}" } }
 }
 
-// Stamp the real project version into fabric.mod.json at build — the manifest
+// Stamp the real project version into fabric.mod.json at build. The manifest
 // declares "version": "${version}"; a hardcoded manifest version silently
 // breaks every dependency gate against this mod.
 processResources {
@@ -124,7 +119,7 @@ modrinth {
     }
 }
 
-// ci-cd.md stage 2: the shipped jar must self-report the bumped version. A jar that
+// The shipped jar must self-report the bumped version. A jar that
 // says the wrong version silently breaks every dependency gate against it, so this
 // fails the build instead of relying on someone remembering to unzip and look.
 tasks.register('verifyJarVersion') {
@@ -141,13 +136,13 @@ tasks.register('verifyJarVersion') {
 }
 build.dependsOn verifyJarVersion
 
-// ci-cd.md stage 2: this mod must pin MenuKit to the major it was built against.
+// This mod must pin MenuKit to the major it was built against.
 // The floor guarantees every MenuKit call it makes exists at load time; the ceiling stops a
 // future breaking major from loading against code that never saw it. Both halves matter:
 // a floor alone lets MenuKit 6.0.0 rename an API out from under a shipped jar, and the
 // player gets a NoSuchMethodError hours into a session instead of a refusal at launch.
 // Commas are rejected outright: Fabric parses ">=5.0.0,<6.0.0" without complaint and the
-// resulting predicate then matches NO version at all, which silently disables the mod.
+// resulting predicate then matches no version at all, which silently disables the mod.
 tasks.register('verifyMenuKitRange') {
     def src = file('src/main/resources/fabric.mod.json')
     def mkVersion = (project.findProperty('menukit_version') ?: '').toString()

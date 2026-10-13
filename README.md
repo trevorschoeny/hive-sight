@@ -20,7 +20,7 @@ When a hive is full, the honey drips show on all four sides instead of only the 
 
 ## Install
 
-- MenuKit 6.1.0 or newer, below 7.0.0
+- MenuKit 7.0.0 or newer, below 8.0.0
 - Fabric API
 
 Install on both client and server. In single player nothing else is needed.

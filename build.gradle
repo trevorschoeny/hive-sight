@@ -100,9 +100,8 @@ processResources {
 // the project id here. Only Lead runs these tasks.
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
-    // Off Modrinth: Trev deleted this project (and the one before it) on purpose, 2026-10-15.
-    // Left empty so a publish fails instead of creating a new project. Never recreate it
-    // without Trev saying so.
+    // The project was deleted on purpose. Left empty so a publish fails instead of
+    // creating a new project; don't recreate it.
     projectId = ""
     versionNumber = property('hivesight_version')
     versionName = "Hive Sight ${property('hivesight_version')}"
